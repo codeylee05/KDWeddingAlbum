@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wedding Album</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <main id="landing" class="landing">
+        <div class="intro">
+            <p class="subtitle">CELEBRATING LOVE</p>
+            <h1>Dineo <span>&</span> Kgotso</h1>
+            <p class="description">A day to remember, a lifetime to cherish.</p>
+            <button id="enterButton">View Wedding Album</button>
+        </div>
+    </main>
+
+    <main id="slideshow" class="slideshow hidden">
+
+        <div class="photo-container">
+            <img id="photoA" class="photo active" alt="Wedding photograph">
+            <img id="photoB" class="photo" alt="Wedding photograph">
+        </div>
+
+        <div class="slideshow-overlay">
+
+            <div class="top-controls">
+                <button id="closeButton" aria-label="Close slideshow">×</button>
+                <p id="photoCounter">1 / 4</p>
+            </div>
+
+            <div class="bottom-controls">
+                <div class="progress-container">
+                    <div id="progressBar"></div>
+                </div>
+
+                <div class="navigation">
+                    <button id="previousButton" aria-label="Previous photo">‹</button>
+                    <button id="pauseButton" aria-label="Pause slideshow">Ⅱ</button>
+                    <button id="nextButton" aria-label="Next photo">›</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
