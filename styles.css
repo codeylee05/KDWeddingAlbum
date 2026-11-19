@@ -123,9 +123,9 @@ h1 span {
     background: rgba(255, 255, 255, 0.18);
     color: white;
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    font-size: 21px;
     display: flex;
     align-items: center;
     justify-content: center;
