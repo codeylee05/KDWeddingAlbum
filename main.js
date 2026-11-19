@@ -1,12 +1,5 @@
 
-
-
-const photos = [
-    "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=85",
-    "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/IMG_0001.JPG",
-    "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&q=85",
-    "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=1200&q=85"
-];
+let photos = [];
 
 const landing = document.getElementById('landing');
 const slideshow = document.getElementById('slideshow');
@@ -32,6 +25,40 @@ let requestId = 0;
 
 const duration = 5000;
 const imageCache = new Map();
+
+const enterButtonLabel = enterButton.textContent;
+
+enterButton.disabled = true;
+enterButton.textContent = 'Loading photos...';
+
+async function loadPhotos() {
+    try {
+        const response = await fetch('./photos.json');
+
+        if (!response.ok) {
+            throw new Error('Could not load photos.json');
+        }
+
+        const data = await response.json();
+
+        photos = data.photos.map(photo => photo.webp);
+
+        if (photos.length === 0) {
+            throw new Error('No photographs found');
+        }
+
+        enterButton.disabled = false;
+        enterButton.textContent = enterButtonLabel;
+
+        photoCounter.textContent = `0 / ${photos.length}`;
+
+        console.log(`Loaded ${photos.length} photographs.`);
+
+    } catch (error) {
+        console.error(error);
+        enterButton.textContent = 'Unable to load photos';
+    }
+}
 
 function preloadPhoto(url) {
     if (imageCache.has(url)) {
@@ -120,6 +147,8 @@ function startTimer() {
 }
 
 async function nextPhoto() {
+    if (!photos.length) return;
+
     stopTimer();
     resetTimer();
 
@@ -131,6 +160,8 @@ async function nextPhoto() {
 }
 
 async function previousPhoto() {
+    if (!photos.length) return;
+
     stopTimer();
     resetTimer();
 
@@ -143,6 +174,8 @@ async function previousPhoto() {
 }
 
 async function enterSlideshow() {
+    if (!photos.length) return;
+
     landing.classList.add('hidden');
     slideshow.classList.remove('hidden');
 
@@ -200,3 +233,5 @@ slideshow.addEventListener('touchend', (event) => {
         previousPhoto();
     }
 }, { passive: true });
+
+loadPhotos();
