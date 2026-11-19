@@ -12,6 +12,7 @@ const closeButton = document.getElementById('closeButton');
 const previousButton = document.getElementById('previousButton');
 const nextButton = document.getElementById('nextButton');
 const pauseButton = document.getElementById('pauseButton');
+const downloadButton = document.getElementById("downloadButton");
 
 const photoCounter = document.getElementById('photoCounter');
 const progressBar = document.getElementById('progressBar');
@@ -41,7 +42,7 @@ async function loadPhotos() {
 
         const data = await response.json();
 
-        photos = data.photos.map(photo => photo.webp);
+        photos = data.photos;
 
         if (photos.length === 0) {
             throw new Error('No photographs found');
@@ -86,13 +87,13 @@ function preloadPhoto(url) {
 function preloadUpcoming() {
     for (let i = 1; i <= 3; i++) {
         const index = (currentIndex + i) % photos.length;
-        preloadPhoto(photos[index]).catch(() => { });
+        preloadPhoto(photos[index].webp).catch(() => { });
     }
 }
 
 async function showPhoto(index) {
     const thisRequest = ++requestId;
-    const url = photos[index];
+    const url = photos[index].webp;
 
     try {
         await preloadPhoto(url);
@@ -117,6 +118,33 @@ async function showPhoto(index) {
     photoCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
 
     preloadUpcoming();
+}
+
+async function downloadPhoto() {
+    const url = photos[currentIndex].original;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error('Download failed');
+        }
+
+        const blob = await response.blob();
+        const downloadUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = `wedding-photo-${currentIndex + 1}.jpg`;
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+        alert('Unable to download this photo. Please try again.');
+    }
 }
 
 function resetTimer() {
@@ -214,6 +242,8 @@ nextButton.addEventListener('click', nextPhoto);
 previousButton.addEventListener('click', previousPhoto);
 pauseButton.addEventListener('click', togglePause);
 closeButton.addEventListener('click', closeSlideshow);
+
+downloadButton.addEventListener('click', downloadPhoto);
 
 let touchStartX = 0;
 
