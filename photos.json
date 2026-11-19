@@ -6,30 +6,7 @@
       "webp": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/optimised/photo-001.webp",
       "original": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/originals/DJI_0050.JPG"
     },
-    {
-      "id": "photo-002",
-      "order": 2,
-      "webp": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/optimised/photo-002.webp",
-      "original": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/originals/DJI_0051.JPG"
-    },
-    {
-      "id": "photo-003",
-      "order": 3,
-      "webp": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/optimised/photo-003.webp",
-      "original": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/originals/DJI_0053.JPG"
-    },
-    {
-      "id": "photo-004",
-      "order": 4,
-      "webp": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/optimised/photo-004.webp",
-      "original": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/originals/DJI_0054.JPG"
-    },
-    {
-      "id": "photo-005",
-      "order": 5,
-      "webp": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/optimised/photo-005.webp",
-      "original": "https://pub-e73c23794e83448bbc5e4d7dcce9f82d.r2.dev/originals/DJI_0055.JPG"
-    },
+    
     {
       "id": "photo-006",
       "order": 6,
