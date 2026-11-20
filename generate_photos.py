@@ -21,7 +21,8 @@ for index, original in enumerate(originals, start=1):
         "id": f"photo-{index:03}",
         "order": index,
         "webp": f"{R2_URL}/optimised/photo-{index:03}.webp",
-        "original": f"{R2_URL}/originals/{quote(original.name)}"
+        "original": f"{R2_URL}/originals/{quote(original.name)}",
+        "thumbnail": f"{R2_URL}/thumbnails/photo-{index:03}.webp",
     }
 
     photos.append(photo)

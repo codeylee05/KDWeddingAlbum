@@ -44,6 +44,19 @@ async function loadPhotos() {
 
         photos = data.photos;
 
+        const params = new URLSearchParams(window.location.search);
+        const requestedPhoto = params.get('photo');
+
+        if (requestedPhoto) {
+            const photoIndex = photos.findIndex(
+                photo => photo.id === requestedPhoto
+            );
+
+            if (photoIndex !== -1) {
+                currentIndex = photoIndex;
+            }
+        }
+
         if (photos.length === 0) {
             throw new Error('No photographs found');
         }
@@ -60,6 +73,8 @@ async function loadPhotos() {
         enterButton.textContent = 'Unable to load photos';
     }
 }
+
+
 
 function preloadPhoto(url) {
     if (imageCache.has(url)) {
@@ -210,7 +225,7 @@ async function enterSlideshow() {
     isPlaying = true;
     pauseButton.textContent = 'Ⅱ';
 
-    await showPhoto(0);
+    await showPhoto(currentIndex);
 
     preloadUpcoming();
     startTimer();
@@ -264,4 +279,8 @@ slideshow.addEventListener('touchend', (event) => {
     }
 }, { passive: true });
 
-loadPhotos();
+loadPhotos().then(() => {
+    if (new URLSearchParams(window.location.search).has('photo')) {
+        enterSlideshow();
+    }
+});
