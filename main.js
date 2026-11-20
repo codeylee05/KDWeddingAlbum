@@ -222,13 +222,18 @@ async function enterSlideshow() {
     landing.classList.add('hidden');
     slideshow.classList.remove('hidden');
 
-    isPlaying = true;
-    pauseButton.textContent = 'Ⅱ';
+    const fromGallery = new URLSearchParams(window.location.search).has('photo');
+
+    isPlaying = !fromGallery;
+    pauseButton.textContent = isPlaying ? 'Ⅱ' : '▶';
 
     await showPhoto(currentIndex);
 
     preloadUpcoming();
-    startTimer();
+
+    if (isPlaying) {
+        startTimer();
+    }
 }
 
 function togglePause() {
